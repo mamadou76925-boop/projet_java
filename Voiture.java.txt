@@ -1,0 +1,44 @@
+public class Voiture {
+
+    String mark, modele, mat, couleur, motorisation;
+    double vitesse;
+
+    public void demarer() {
+        System.out.println("j'ai demarer");
+    }
+
+    public void modifier(String c) {
+        couleur = c;
+    }
+
+    public void accelerer(double v) {
+        vitesse = v;
+    }
+
+    public void init(String mark, String modele, String mat, String cul,
+                     String moto, double vitesse) {
+        this.mark = mark;
+        this.modele = modele;
+        this.couleur = cul;
+        this.mat = mat;
+        this.motorisation = moto;
+        this.vitesse = vitesse;
+    }
+
+    public static void main(String[] args) {
+
+        Voiture v1 = new Voiture();
+
+        v1.init("Mazda", "CX5", "dk3446", "rouge", "automatique", 308);
+
+        System.out.println("Mazda : " + v1.mark+ "\nModele : " + v1.modele+ "\nCouleur : " + v1.couleur+ "\nVitesse : " + v1.vitesse + " km/h");
+v1.demarer)
+
+        Voiture v2 = new Voiture();
+
+        v2.init("Mazda", "CX5", "dk3446", "rouge", "automatique", 308);
+
+        System.out.println("Mazda : " + v2.mark+ "\nModele : " + v2.modele+ "\nCouleur : " + v2.couleur+ "\nVitesse : " + v2.vitesse + " km/h");
+v1.demarer
+    }
+}

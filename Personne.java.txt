@@ -1,0 +1,81 @@
+/**
+ * b) Classe représentant une personne pouvant porter une montre.
+ * c) Une montre ne peut être portée que par une seule personne à la fois.
+ */
+public class Personne {
+
+    private String nom;
+    private Montre montre; // null si la personne ne porte pas de montre
+
+    public Personne(String nom) {
+        this.nom = nom;
+        this.montre = null;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public boolean aUneMontre() {
+        return montre != null;
+    }
+
+    /**
+     * Fait porter une montre donnée à cette personne, seulement si :
+     * - elle n'a pas déjà de montre,
+     * - et la montre n'est pas déjà portée par quelqu'un d'autre (c).
+     */
+    public void porterMontre(Montre m) {
+        if (this.montre != null) {
+            System.out.println(nom + " porte déjà une montre, impossible d'en porter une autre.");
+            return;
+        }
+        if (m.estPortee()) {
+            System.out.println("Cette montre est déjà portée par " + m.getPorteur().getNom() + ".");
+            return;
+        }
+        this.montre = m;
+        m.setPorteur(this);
+    }
+
+    /** Enlève la montre de la personne, si elle en a une. */
+    public void enleverMontre() {
+        if (this.montre != null) {
+            this.montre.setPorteur(null);
+            this.montre = null;
+        }
+    }
+
+    /**
+     * Demande l'heure à une autre personne.
+     * Retourne l'heure sous forme de chaîne si l'autre personne a une montre,
+     * sinon retourne une chaîne vide.
+     */
+    public String demanderHeure(Personne autre) {
+        if (autre.montre != null) {
+            return autre.montre.toString();
+        }
+        return "";
+    }
+
+    /** Petite démonstration du fonctionnement des classes b) et c). */
+    public static void main(String[] args) {
+        Personne fatou = new Personne("Fatou");
+        Personne moussa = new Personne("Moussa");
+        Montre montre = new Montre(13, 45);
+
+        fatou.porterMontre(montre);
+        System.out.println("Moussa demande l'heure à Fatou : " + moussa.demanderHeure(fatou));
+
+        // c) Moussa essaie de porter la même montre : refusé
+        moussa.porterMontre(montre);
+
+        // Fatou enlève sa montre, puis Moussa peut la porter
+        fatou.enleverMontre();
+        moussa.porterMontre(montre);
+
+        System.out.println("Fatou demande l'heure à Moussa : " + fatou.demanderHeure(moussa));
+        System.out.println("Fatou demande l'heure à elle-même (sans montre) : \""
+                + fatou.demanderHeure(fatou) + "\"");
+    }
+}
